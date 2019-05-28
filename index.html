@@ -1,0 +1,89 @@
+<html>
+	<head>
+		<title>Ohm</title>
+		<meta charset="utf-8">
+		<link href="https://fonts.googleapis.com/css?family=Hind+Madurai&display=swap" rel="stylesheet">
+		
+		<style>
+			*{
+				margin:0px;
+				padding:0px;
+			}
+			
+			body
+			{
+				background:lightyellow;
+			}
+			
+			h1
+			{
+				//font-family: 'Hind Madurai', sans-serif;
+				font-size:1500%;
+				text-align:center;
+				margin-top:10%;
+				color:red;
+				text-shadow:2px 2px 12px red;
+			}
+			
+			audio{
+				margin:0px auto;
+				display:block;
+				width:50%;
+				margin-top:10%;
+				margin-bottom:0px;
+			}
+			
+			
+		</style>
+	</head>
+	
+	<body>
+	<iframe src="silence.mp3" allow="autoplay" id="audio" style="display:none"></iframe>
+		
+		
+		<h1>
+			ஓம்
+		</h1>
+		<audio autoplay controls loop id="sound">
+			<source src="ohm.mp3" type="audio/mpeg">
+		</audio>
+		
+		<script>
+		
+			getSoundAndFadeAudio();
+			var snd;
+			var fadePoint;
+			
+			function getSoundAndFadeAudio () {
+
+			var sound = document.getElementById("sound");
+			console.log(sound);
+			
+			sound.onloadedmetadata = function() {
+			  snd=sound.duration;
+			  fadePoint = snd - 2;
+			  console.log(fadePoint);
+			  //alert(snd);
+			};
+
+			// Set the point in playback that fadeout begins. This is for a 2 second fade out.
+			 
+			
+			var fadeAudio = setInterval(function () {
+
+				//console.log(sound.currentTime);
+				// Only fade if past the fade out point or not at zero already
+				if ((sound.currentTime >= fadePoint) && (sound.volume >= 0)) {
+					sound.volume -= 0.05;
+				}else
+				{
+					sound.volume=1;
+				}
+				console.log(sound.volume);
+				// When volume at zero stop all the intervalling	
+    }, 200);
+}
+		</script>
+	</body>
+	
+</html>
